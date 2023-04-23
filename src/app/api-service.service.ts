@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ApiServiceService {
-  // basePath2 = 'http://localhost:5000/api/v1/';
-  basePath2 =
-    'http://product-back-9vo2w3tcg-gunjashsheth140798.vercel.app/api/v1/';
+  basePath2 = 'http://localhost:5000/api/v1/';
+  // basePath2 =
+  //   'http://product-back-9vo2w3tcg-gunjashsheth140798.vercel.app/api/v1/';
   a = window.location.hostname;
   basePath = this.a === 'localhost' ? this.basePath2 : environment.basePath;
 
