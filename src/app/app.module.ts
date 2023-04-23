@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { AddProductsComponent } from './components/add-products/add-products.component';
 import { LoginComponent } from './login/login.component';
 import { AuthconfigInterceptor } from './authconfig.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AuthconfigInterceptor } from './authconfig.interceptor';
     NgbModule,
   ],
   providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthconfigInterceptor,
