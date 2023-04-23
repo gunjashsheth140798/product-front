@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ isEditMode ? "Edit" : "Add" }} Product</h5>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" class="form-control" formControlName="name" />
+          <small
+            *ngIf="
+              submitted && productForm.controls['name'].hasError('required')
+            "
+            class="form-text text-danger"
+          >
+            Name is required
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            class="form-control"
+            formControlName="description"
+          ></textarea>
+          <small
+            *ngIf="
+              submitted &&
+              productForm.controls['description'].hasError('required')
+            "
+            class="form-text text-danger"
+          >
+            Description is required
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price</label>
+
+          <input
+            id="price"
+            type="number"
+            class="form-control"
+            formControlName="price"
+          />
+          <small
+            *ngIf="
+              submitted && productForm.controls['price'].hasError('required')
+            "
+            class="form-text text-danger"
+          >
+            Price is required
+          </small>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary me-3 mt-5"
+          [disabled]="productForm.invalid"
+        >
+          {{ isEditMode ? "Update" : "Add" }}
+        </button>
+        <button routerLink="/" type="button" class="btn btn-dark mt-5">
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

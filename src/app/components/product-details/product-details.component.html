@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row" *ngIf="product">
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">
+            {{ product.price | currency }}
+          </p>
+          <p class="card-text">
+            {{ product.description }}
+          </p>
+          <a
+            style="cursor: pointer"
+            class="btn btn-dark me-3"
+            [routerLink]="['/']"
+            >Back to List</a
+          >
+          <a
+            style="cursor: pointer"
+            class="btn btn-warning me-3"
+            (click)="editDetails(product._id)"
+            class="btn btn-warning me-3"
+            >Edit</a
+          >
+          <a
+            style="cursor: pointer"
+            (click)="deleteProduct(product)"
+            class="btn btn-danger"
+            >Delete</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!product">No Data Available</div>
+</div>

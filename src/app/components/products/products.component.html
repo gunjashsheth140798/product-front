@@ -1,0 +1,81 @@
+<div class="container mt-3">
+  <div class="card-body d-flex justify-content-center mb-3">
+    <div class="search-wrapper" [class.active]="isActive">
+      <div class="input-holder" style="max-width: 750px">
+        <input
+          type="text"
+          label="sourcesearch"
+          placeholder="Search ..."
+          [(ngModel)]="search"
+          class="search-input"
+          (ngModelChange)="getProducts()"
+        />
+        <button class="search-icon" (click)="isActive = true">
+          <span></span>
+        </button>
+      </div>
+      <button
+        class="close"
+        (click)="search = ''; getProducts()"
+        style="left: 300x"
+      ></button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="products">
+    <div class="col-md-6" *ngFor="let product of products">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">
+            {{ product.price | currency }}
+          </p>
+          <p class="card-text">
+            {{ product.description }}
+          </p>
+          <a
+            style="cursor: pointer"
+            class="btn btn-primary me-3"
+            (click)="gotoDetails(product._id)"
+            >View Details</a
+          >
+          <a
+            style="cursor: pointer"
+            class="btn btn-warning me-3"
+            (click)="editDetails(product._id)"
+            >Edit</a
+          >
+          <a
+            style="cursor: pointer"
+            (click)="deleteProduct(product)"
+            class="btn btn-danger"
+            >Delete</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="products.length === 0">No Data Available</div>
+
+  <div class="d-block p-4 card-footer">
+    <div class="d-flex w-100 justify-content-between">
+      <ngb-pagination
+        [collectionSize]="size"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [boundaryLinks]="true"
+        (pageChange)="getProducts()"
+      ></ngb-pagination>
+
+      <div class="text-right" *ngIf="size">
+        <span class="mr-2">Rows per page</span>
+        <select [(ngModel)]="pageSize" (ngModelChange)="handlePageSizeChange()">
+          <option *ngFor="let size of pageSizes" [value]="size">
+            {{ size }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
